@@ -1,0 +1,26 @@
+name: Update Portal
+
+on:
+  push:
+    branches: 
+      - master 
+    paths: 
+      - 'spec/**'   
+
+jobs:
+  update-portal:
+    runs-on: ubuntu-latest
+    
+    env: 
+      API_ENTITY_ID: 60c85780cf4a85745dff47df  
+    steps:
+    
+    - uses: actions/checkout@v1
+      name : checkout-repo
+      id: checkout-repo     
+     
+    - name: inplace-import
+      run: curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}' -H 'Authorization:${{ secrets.CREDENTIALS }}' -F 'file=@spec/APIMATIC Calculator-OpenApi3Json.json'
+      
+    - name: publish-portal
+      run: curl -X PUT --url "https://www.apimatic.io/api/api-entities/portals/publish" -H "accept:application/json" -H "Authorization:${{ secrets.CREDENTIALS }}" -H "content-type:application/json" --data-raw "{\"apiEntityIds\":[\"${{ env.API_ENTITY_ID }}\"]}"
