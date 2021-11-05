@@ -20,7 +20,7 @@ jobs:
       id: checkout-repo     
      
     - name: inplace-import
-      run: curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}' -F 'file=@spec/APIMATIC Calculator-OpenApi3Json.json'
+      run: curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}' -H 'content-type:multipart/form-data' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}' -F 'file=@spec/APIMATIC Calculator-OpenApi3Json.json'
       
     - name: publish-portal
       run: curl --location --request PUT 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}/portal/publish' -H 'Content-Length:0' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}'
