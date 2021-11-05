@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "APIMATIC Calculator test",
+    "title": "APIMATIC Calculator test - demo automation",
     "description": "Simple calculator API hosted on APIMATIC",
     "contact": {},
     "version": "1.0"
