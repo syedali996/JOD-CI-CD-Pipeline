@@ -11,9 +11,7 @@ on:
 jobs:
   update-portal:
     runs-on: ubuntu-latest
-    
-    env: 
-      API_ENTITY_ID: 618529593a1f4532cfd7e6a4 
+
     steps:
     
     - uses: actions/checkout@v1
@@ -21,7 +19,8 @@ jobs:
       id: checkout-repo     
      
     - name: inplace-import
-      run: curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}' -H 'content-type:multipart/form-data' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}' -F 'file=@spec/APIMATIC Calculator-OpenApi3Json.json'
+      run: curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ secrets.API_ENTITY_ID }}' -H 'content-type:multipart/form-data' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}' -F 'file=@spec/APIMATIC Calculator-OpenApi3Json.json'
       
-    - name: publish-portal
-      run: curl --location --request PUT 'https://www.apimatic.io/api/api-entities/${{ env.API_ENTITY_ID }}/portal/publish' -H 'Content-Length:0' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}'
+# Uncomment the following step to publish your Portal. The portal must first be published manually for this step to work successfully.
+#     - name: publish-portal
+#       run: curl --location --request PUT 'https://www.apimatic.io/api/api-entities/${{ secrets.API_ENTITY_ID }}/portal/publish' -H 'Content-Length:0' -H 'Authorization:X-Auth-Key ${{ secrets.API_KEY }}'
