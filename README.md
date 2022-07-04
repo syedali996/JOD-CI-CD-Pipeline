@@ -4,7 +4,7 @@ The [_main.yml_](https://github.com/apimatic/hosted-portal-workflow/blob/master/
 
 
 ## Prerequisites
- [Generate an API KEY](https://docs.apimatic.io/manage-apis/get-api-keys/) before proceeding.   
+ [Generate an API KEY](https://docs.apimatic.io/account-management/obtaining-auth-keys/) before proceeding.   
     
     
    
