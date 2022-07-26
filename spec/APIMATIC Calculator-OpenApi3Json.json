@@ -4,7 +4,7 @@
     "title": "APIMATIC Calculator test",
     "description": "Simple calculator API hosted on APIMATIC demo automation",
     "contact": {},
-    "version": "3"
+    "version": "4"
   },
   "servers": [
     {
