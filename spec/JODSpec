@@ -17,7 +17,7 @@
       "get": {
         "summary": "Retrieve Joke",
         "description": "",
-        "operationId": "BringBackJoke",
+        "operationId": "RetrieveJoke",
         "parameters": [
           {
             "name": "category",
