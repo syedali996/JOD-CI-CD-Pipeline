@@ -1,0 +1,339 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Joke of the day",
+    "description": "API used to retrieve a random joke for the day based on a category for the joke provided.",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.jokes.one",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/jod": {
+      "get": {
+        "summary": "Retrieve Joke",
+        "description": "",
+        "operationId": "RetrieveJoke",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "defines the category for the joke of the day",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/CategoryModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseModel"
+                },
+                "example": {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "jokes": [
+                      {
+                        "description": "Animal Joke of the day ",
+                        "language": "en",
+                        "background": "",
+                        "category": "animal",
+                        "date": "2022-07-01",
+                        "joke": {
+                          "title": "Three Blind Mice",
+                          "lang": "en",
+                          "length": "63",
+                          "clean": "0",
+                          "racial": "0",
+                          "date": "2022-07-01",
+                          "id": "1FTfr0j5N7PO6FA_hHOJrgeF",
+                          "text": "Q: What's every cat's favorite song?\r\n A: Three Blind Mice!\r\n\r\n"
+                        }
+                      }
+                    ],
+                    "copyright": "2019-20 https://jokes.one"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/jod/categories": {
+      "get": {
+        "summary": "Categories for jokes of the day",
+        "description": "",
+        "operationId": "Categoriesforjokesoftheday",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "success": {
+                      "total": 4
+                    },
+                    "contents": {
+                      "categories": [
+                        {
+                          "name": "jod",
+                          "description": "Joke of the day ",
+                          "language": "en",
+                          "background": ""
+                        },
+                        {
+                          "name": "animal",
+                          "description": "Animal Joke of the day ",
+                          "language": "en",
+                          "background": ""
+                        },
+                        {
+                          "name": "blonde",
+                          "description": "Blonde joke of the day!",
+                          "language": "en",
+                          "background": ""
+                        },
+                        {
+                          "name": "knock-knock",
+                          "description": "Knock Knock joke of the day!",
+                          "language": "en",
+                          "background": ""
+                        }
+                      ],
+                      "copyright": "2019-20 https://jokes.one"
+                    }
+                  }
+                },
+                "example": {
+                  "success": {
+                    "total": 4
+                  },
+                  "contents": {
+                    "categories": [
+                      {
+                        "name": "jod",
+                        "description": "Joke of the day ",
+                        "language": "en",
+                        "background": ""
+                      },
+                      {
+                        "name": "animal",
+                        "description": "Animal Joke of the day ",
+                        "language": "en",
+                        "background": ""
+                      },
+                      {
+                        "name": "blonde",
+                        "description": "Blonde joke of the day!",
+                        "language": "en",
+                        "background": ""
+                      },
+                      {
+                        "name": "knock-knock",
+                        "description": "Knock Knock joke of the day!",
+                        "language": "en",
+                        "background": ""
+                      }
+                    ],
+                    "copyright": "2019-20 https://jokes.one"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CategoryModel": {
+        "title": "CategoryModel",
+        "enum": [
+          "animal",
+          "jod",
+          "blonde",
+          "knock-knock"
+        ],
+        "type": "string",
+        "description": "Category for model"
+      },
+      "Contents": {
+        "title": "Contents",
+        "required": [
+          "jokes",
+          "copyright"
+        ],
+        "type": "object",
+        "properties": {
+          "jokes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Joke"
+            },
+            "description": "",
+            "example": [
+              {
+                "description": "Blonde joke of the day!",
+                "language": "en",
+                "background": "",
+                "category": "blonde",
+                "date": "2022-07-01",
+                "joke": {
+                  "title": "The sweater",
+                  "lang": "en",
+                  "length": "248",
+                  "clean": "1",
+                  "racial": "0",
+                  "date": "2022-07-01",
+                  "id": "C_MSfIU_ZIz1s4bfG5x7CweF",
+                  "text": "A cop is driving down the freeway when he sees a blonde knitting while she is driving. Confused he turns on his siren and loudpeaker and says, \"pullover, pullover.\" The blond looks up at the cop and then down and screams, \" No, it s a sweater!\"\r\n\r\n"
+                }
+              }
+            ]
+          },
+          "copyright": {
+            "type": "string",
+            "example": "2019-20 https://jokes.one"
+          }
+        }
+      },
+      "ResponseModel": {
+        "title": "ResponseModel",
+        "required": [
+          "success",
+          "contents"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/Success"
+          },
+          "contents": {
+            "$ref": "#/components/schemas/Contents"
+          }
+        }
+      },
+      "Success": {
+        "title": "Success",
+        "required": [
+          "total"
+        ],
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        }
+      },
+      "Joke": {
+        "title": "Joke",
+        "required": [
+          "description",
+          "language",
+          "background",
+          "category",
+          "date",
+          "joke"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "Blonde joke of the day!"
+          },
+          "language": {
+            "type": "string",
+            "example": "en"
+          },
+          "background": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "example": "blonde"
+          },
+          "date": {
+            "type": "string",
+            "example": "2022-07-01"
+          },
+          "joke": {
+            "$ref": "#/components/schemas/Joke1"
+          }
+        }
+      },
+      "Joke1": {
+        "title": "Joke1",
+        "required": [
+          "title",
+          "lang",
+          "length",
+          "clean",
+          "racial",
+          "date",
+          "id",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "The sweater"
+          },
+          "lang": {
+            "type": "string",
+            "example": "en"
+          },
+          "length": {
+            "type": "string",
+            "example": "248"
+          },
+          "clean": {
+            "type": "string",
+            "example": "1"
+          },
+          "racial": {
+            "type": "string",
+            "example": "0"
+          },
+          "date": {
+            "type": "string",
+            "example": "2022-07-01"
+          },
+          "id": {
+            "type": "string",
+            "example": "C_MSfIU_ZIz1s4bfG5x7CweF"
+          },
+          "text": {
+            "type": "string",
+            "example": "A cop is driving down the freeway when he sees a blonde knitting while she is driving. Confused he turns on his siren and loudpeaker and says, \"pullover, pullover.\" The blond looks up at the cop and then down and screams, \" No, it s a sweater!\"\r\n\r\n"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
